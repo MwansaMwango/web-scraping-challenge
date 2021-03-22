@@ -77,8 +77,8 @@ def mars_facts():
     mars_facts_url = 'https://space-facts.com/mars/'
     tables = pd.read_html(mars_facts_url)
     mars_planet_profile_df = tables[0]
-    mars_planet_profile_df.columns = ['FACT', 'VALUE']
-    mars_planet_profile_df.set_index('FACT', inplace=True)
+    mars_planet_profile_df.columns = ['Description', 'Mars']
+    mars_planet_profile_df.set_index('Description', inplace=True)
 
     # Convert to HTML table string and return
     return mars_planet_profile_df.to_html()
