@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect
 # Import our pymongo library, which lets us connect our Flask app to our Mongo database.
 from flask_pymongo import PyMongo
-# Import scrape_mars
 import scrape_mars
 
 # Create an instance of our Flask app.
@@ -19,10 +18,10 @@ def index():
 # Scrape page and store info in MongoDB database
 @app.route("/scrape")
 def scrape():
-    # mars = mongo.db.collection
+    # Get mars data returned in results dictionary after running the scrape() function 
     mars_data = scrape_mars.scrape()
+    # Create and update table caled 'collection' in mission_to_mars_db
     mongo.db.collection.update({}, mars_data, upsert=True)
-    # mars.update({}, mars_data)
     print("Scraped!", mars_data)
     # Redirect back to home page
     return redirect("/")
